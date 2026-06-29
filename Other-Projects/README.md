@@ -1,20 +1,21 @@
 # Other Projects
 
-This folder contains web development and miscellaneous projects that fall outside the automation scope of this portfolio — primarily frontend work and experimental builds.
+Web development and miscellaneous projects that fall outside the automation scope of this portfolio — primarily frontend work and real-client website builds.
 
 ---
 
 ## Web Development
 
 ### Cosmetic Webpage — Beauty Salon Website
-**Repository:** [Cosmetic-webpage](https://github.com/NandesHungarian/Cosmetic-webpage)
+
+**Repository:** [NandesHungarian/Cosmetic-webpage](https://github.com/NandesHungarian/Cosmetic-webpage)
 
 A fully responsive, multilingual beauty salon website built for a real client.
 
 **Features:**
 - Multilingual support: Hungarian, English, German (HU/EN/DE)
 - SEO-optimized metadata and Open Graph tags
-- Client-friendly CMS via Decap CMS (no-code content editing)
+- Client-friendly CMS via Decap CMS — the client edits content without touching code
 - Fluid, mobile-first CSS layout
 - Deployed on Netlify with continuous deployment from GitHub
 
@@ -22,10 +23,11 @@ A fully responsive, multilingual beauty salon website built for a real client.
 
 ---
 
-### italiano-b2
-**Repository:** [italiano-b2](https://github.com/NandesHungarian/italiano-b2)
+### italiano-b2 — Italian Language Study Site
 
-Personal HTML/CSS learning project for Italian language B2 level study materials.
+**Repository:** [NandesHungarian/italiano-b2](https://github.com/NandesHungarian/italiano-b2) *(private — content upload in progress)*
+
+A personal HTML/CSS project for B2-level Italian language study material. Full content and description will be added when the material upload is complete.
 
 **Stack:** HTML · CSS
 

@@ -1,111 +1,100 @@
 # VBA Automation Scripts
 
-Excel and Outlook VBA macros built for daily operational use in agricultural commodity trading and logistics. Each script replaces a specific manual workflow that was either error-prone, time-consuming, or both.
+Excel and Outlook VBA macros built for **daily operations in agricultural commodity trading**. Each macro eliminates a specific manual, error-prone task from the daily workflow.
 
-All files use the `.vba` extension for readability in version control. To use them, open the VBA editor in Excel (`Alt+F11`) and paste the code into the appropriate module.
+All scripts are anonymized — partner names, sheet names, and internal references have been replaced with generic placeholders.
 
 ---
 
 ## Scripts
 
-### [`Aviso_Automation`](./Aviso_Automation)
+### `Aviso_Automation` — Daily Logistics Dispatch Email Generator
 
-**What it does:** Generates and sends the daily logistics dispatch (aviso) emails to delivery partners without any manual input.
+**Problem solved:** Every day the operations team had to manually copy shipment data from Excel into Outlook emails and send them to 5–15 logistics partners. This took ~1 hour per day and was prone to copy-paste errors.
 
-**The problem it solved:** Every morning, the logistics team had to open the dispatch plan, filter by partner, copy the relevant rows, format an email table manually, and send individual emails to each counterparty. One missed partner or copy-paste error meant a delayed truck.
+**What it does:**
+- Reads active shipment rows from the master Excel workbook
+- Formats the data into an HTML table matching the company's standard aviso template
+- Injects the table into an Outlook `.oft` template
+- Sends individualized emails to each logistics partner automatically
 
-**How it works:**
-- Reads the day’s dispatch data from a structured Excel table
-- Groups rows by delivery partner
-- Builds an HTML-formatted table for each partner’s deliveries
-- Injects the table into a pre-designed Outlook `.oft` template
-- Sends each email automatically
-
-**Time saved:** ~1 hour/day  
-**Tech:** Excel VBA · Outlook VBA · HTML email templating
+**Time saved:** ~1 hour/day (~20 hours/month)
 
 ---
 
-### [`FCA_Price_Indication_Emailer.vba`](./FCA_Price_Indication_Emailer.vba)
+### `FCA_Price_Indication_Emailer.vba` — FCA Price Offer Distributor
 
-**What it does:** Distributes personalised FCA price indication emails to counterparties based on their regional coverage.
+**Problem solved:** After a morning price meeting, traders needed to send FCA price indications to counterparties — each covering a specific geographic region. The correct prices, products, and recipients had to be matched manually from a master table.
 
-**The problem it solved:** Price indications had to go out to a list of partners each day, but each partner only receives prices for their specific coverage region. Manually filtering and sending individual emails was slow and created version-control risk (wrong prices to wrong partner).
-
-**How it works:**
-- Reads the price indication table and the partner–region mapping from Excel
-- For each partner, filters the rows relevant to their coverage
-- Composes and sends a personalised Outlook email with their specific price table
-
-**Tech:** Excel VBA · Outlook VBA
+**What it does:**
+- Reads the current price indication table from a structured Excel sheet
+- Matches each row to the responsible regional coverage list
+- Generates and sends personalised Outlook emails per counterparty with only their relevant price rows
 
 ---
 
-### [`Period_Average_Calculator.vba`](./Period_Average_Calculator.vba)
+### `Period_Average_Calculator.vba` — Weighted Average Price Calculator
 
-**What it does:** Calculates weighted average commodity prices across configurable time windows.
+**Problem solved:** Management reporting required weighted average commodity prices over configurable periods (weekly, monthly, crop year). This was done manually using complex nested Excel formulas that broke when source data structure changed.
 
-**The problem it solved:** Management reports required period average prices (daily, weekly, monthly, crop-year) that had to be manually calculated from transaction data each time.
-
-**How it works:**
-- Reads raw transaction data (quantity, price, date)
-- Calculates weighted averages for user-selected periods
-- Writes results to a summary table formatted for management reporting
-- Supports multiple commodities and delivery locations in one run
-
-**Tech:** Excel VBA
+**What it does:**
+- Accepts a configurable date range input
+- Calculates weighted averages (by quantity) for each commodity and base location combination
+- Writes results to a formatted summary sheet
 
 ---
 
-### [`Tiered_Pricing_and_Deviation_Tracker.vba`](./Tiered_Pricing_and_Deviation_Tracker.vba)
+### `Tiered_Pricing_and_Deviation_Tracker.vba` — Price Deviation Auditor
 
-**What it does:** Flags contracts where the agreed price deviates from tiered pricing thresholds, and generates an audit trail.
+**Problem solved:** Contracts were sometimes booked at prices outside the approved tiered pricing grid. These deviations were not caught until end-of-month reconciliation.
 
-**The problem it solved:** With volume-based tiered pricing, identifying which contracts were priced outside their applicable threshold required manual cross-referencing of the contract list against the pricing matrix.
-
-**How it works:**
-- Reads the contract list and the tiered pricing matrix
-- For each contract, identifies the applicable tier based on volume and partner category
-- Compares the contracted price to the tier threshold
-- Applies conditional formatting (green / amber / red) based on deviation magnitude
-- Builds a summary audit sheet listing all out-of-band contracts
-
-**Tech:** Excel VBA
+**What it does:**
+- Reads the active tiered pricing grid
+- Compares each contract's booked price against the applicable tier
+- Highlights deviations with conditional formatting (color-coded by severity)
+- Generates a summary audit trail sheet listing all flagged contracts
 
 ---
 
-### [`Incoming_Data_Consolidator.vba`](./Incoming_Data_Consolidator.vba)
+### `Incoming_Data_Consolidator.vba` — Multi-Sheet Data Merger
 
-**What it does:** Merges incoming data from multiple Excel sheets into a single normalised master table.
+**Problem solved:** Multiple regional teams sent their data in separate Excel files or sheets with slightly different column orders. Consolidating them required manual copy-paste and deduplication.
 
-**The problem it solved:** Data from different partners arrived in slightly different Excel formats — different column orders, different header names, missing fields. Manually standardising and appending each file was tedious and introduced inconsistencies.
-
-**How it works:**
-- Reads all source sheets (or files) defined in a configuration table
-- Maps each source column to the target master schema by name matching
-- Deduplicates rows based on a configurable key column
-- Appends all data to the master table with source tracking
-
-**Tech:** Excel VBA
+**What it does:**
+- Iterates over all source sheets (or files via folder path)
+- Normalizes column order based on header names (not fixed column positions)
+- Deduplicates by a unique contract identifier column
+- Writes a clean master table to a target sheet
 
 ---
 
-### [`Regional_Coverage_Report_Distributor.vba`](./Regional_Coverage_Report_Distributor.vba)
+### `Regional_Coverage_Report_Distributor.vba` — Report Splitter & Distributor
 
-**What it does:** Splits a master coverage report by region and sends each section to the responsible regional coordinator via Outlook.
+**Problem solved:** The weekly master coverage report contained data for all regional coordinators. Manually splitting it and emailing each coordinator their slice took ~45 minutes every week.
 
-**The problem it solved:** The monthly coverage report had to be manually filtered per region, saved as a separate file, and emailed to each coordinator. With multiple regions, this was 20–30 minutes of repetitive work every month.
+**What it does:**
+- Reads the master coverage sheet
+- Groups rows by regional coordinator
+- Creates a separate formatted sheet per coordinator
+- Sends each sheet as an Outlook email attachment to the responsible person
 
-**How it works:**
-- Reads the master report and the region–coordinator mapping table
-- For each region, filters the relevant rows
-- Writes the filtered data to a temporary sheet
-- Attaches it to an Outlook email addressed to the correct coordinator and sends
-
-**Tech:** Excel VBA · Outlook VBA
+**Time saved:** ~45 minutes/week (~3 hours/month)
 
 ---
 
-## Notes on File Extensions
+## How to Use
 
-The `Aviso_Automation` and `Email` files have no extension — they are plain VBA source files. Files ending in `.vba` are identically structured. All can be pasted directly into the Excel/Outlook VBA editor.
+Each `.vba` file contains the full macro code. To use in Excel:
+
+1. Open the target Excel workbook
+2. Press `Alt + F11` to open the VBA editor
+3. Insert a new Module (`Insert → Module`)
+4. Paste the script content
+5. Adjust the sheet name and column references at the top of each script to match your workbook
+6. Run with `F5` or assign to a button
+
+---
+
+## Output Examples
+
+> Sanitized screenshots will be added here.

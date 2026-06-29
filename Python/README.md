@@ -1,50 +1,75 @@
 # Python Automation Scripts
 
-This folder contains Python scripts for data processing, SAP ERP integration, and automated report generation. All scripts are built for Windows environments in a corporate agricultural trading context.
+Real-world Python scripts built for **agricultural commodity trading and logistics operations**. Each script solves a specific, recurring operational problem that previously required manual effort.
 
 ---
 
 ## Scripts
 
-### `sap_sales_automation_.py`
-**SAP Sales & Logistics Workflow Automation**
+### `sap_sales_automation_.py` — SAP Sales & Logistics Workflow Automation
 
-End-to-end automation pipeline that connects to a live SAP ERP system via COM-based GUI scripting, exports the daily or weekly sales report, and processes it through a multi-step transformation chain:
+**Problem solved:** Generating the daily/weekly sales management report required logging into SAP manually, running a custom transaction, exporting to Excel, then spending 30–60 minutes on manual price calculations, currency conversions, and formatting. This script does all of it automatically.
 
-- **SAP Login & Export:** Attaches to a running SAP GUI session (or launches one), navigates to the custom transaction code, sets the date range, and exports the ALV report to Excel
-- **Multi-currency EUR Conversion:** Reads daily price indication files from a shared folder, performs date-matched FX lookups (HUF/USD → EUR) and calculates `Flat EUR`, `freight EUR`, and `Net Flat EUR` per row
-- **Missing Freight Handling:** If a contract row requires freight cost but none is recorded, a `tkinter` popup prompts the user in real-time — the entered value is cached and backfilled to all related rows automatically
-- **Partner Filtering:** Excludes internal intercompany partners and flags suspicious rows (e.g. HUF price below threshold, DDP/CPT with no freight) with red row highlighting
-- **Management Summary Table:** Draws a pivot-style summary by location × commodity × crop year at the bottom of the report, with Friday-only breakdown for weekly runs
-- **Map Generation Prompt:** Offers to launch `map_generator_.py` after report completion
+**What it does:**
+1. Launches SAP GUI and logs in automatically from a local credentials file
+2. Navigates to the custom sales transaction, sets the date range (daily on weekdays, weekly on Monday), and exports the report to Excel
+3. Detects missing freight costs for non-FCA contracts and prompts the user with a Tkinter popup — caches the entered value for the entire contract
+4. Loads daily FX rate files (EUR/HUF, USD/HUF) and converts all Flat Prices and freight costs to EUR net equivalents
+5. Reorders columns to a fixed management layout, applies conditional formatting (red rows for anomalies), and adds a pivot-style summary table at the bottom
+6. Saves the finished report to a local folder
+7. Optionally launches the interactive HTML logistics map generator (`map_generator_.py`)
 
-**Stack:** `win32com` · `tkinter` · `ttk` · `openpyxl` · `datetime` · `glob` · `shutil`  
-**Platform:** Windows only (SAP GUI + COM automation)
+**Stack:** `win32com` · `tkinter` · `SAP GUI Scripting API` · `openpyxl` · `pandas` · `datetime` · `glob`
 
-> All T-codes, system names, user IDs, file paths, and partner names have been anonymized.
+**Key design decisions:**
+- Credentials are read from a local plaintext config file — never hardcoded
+- Freight values are cached per contract base number (e.g. `MC-001-A` and `MC-001-B` share one freight entry)
+- FX rate lookup uses the closest available prior date, not an exact match
+- All company-specific T-codes, plant codes, and file paths are anonymized
 
 ---
 
-### `Historical_Trade_Data_Analyzer.py`
-**Historical Trade Data Analyzer**
+### `map_generator_.py` — Interactive HTML Logistics Map Generator
 
-Analyses multi-year commodity trade history exported from ERP systems. Designed to work with structured Excel exports.
+**Problem solved:** After the sales report is generated, the logistics team needed a visual overview of active shipment locations — spreadsheets are not suitable for geographic analysis.
 
-- Calculates weighted average prices across configurable period windows
-- Detects and flags price deviations from historical baselines
-- Exports clean, structured Excel summaries formatted for management reporting
+**What it does:**
+- Reads the processed sales Excel report
+- Extracts active contract locations, partner names, and commodity types
+- Generates a self-contained interactive HTML map using Folium/Leaflet.js
+- Color-codes markers by commodity and IncoTerm type
+- Exports a single `.html` file that can be opened in any browser without dependencies
+
+**Stack:** `pandas` · `folium` · `openpyxl`
+
+---
+
+### `Historical_Trade_Data_Analyzer.py` — Historical Trade Data Analyzer
+
+**Problem solved:** Management needed period-over-period commodity price comparisons across multiple years of trade history stored in Excel files.
+
+**What it does:**
+- Loads multi-year trade data from Excel
+- Calculates weighted average prices per configurable time period
+- Flags deviations from historical baselines
+- Exports a structured summary Excel file ready for presentation
 
 **Stack:** `pandas` · `openpyxl`
 
 ---
 
-## Requirements
+## How to Run
 
-See the root [`requirements.txt`](../SAP/) or individual script headers for dependencies.  
-All scripts require Python 3.9+.
-
-```
-pip install pandas openpyxl pywin32
+```bash
+pip install -r requirements.txt
+python sap_sales_automation_.py
 ```
 
-> `pywin32` (`win32com`) is Windows-only and required for both SAP GUI scripting and Excel COM automation.
+> Requires SAP GUI installed locally with Scripting API enabled.
+> Credentials must be set in `~/sap_config.txt` on first run — the script creates a template automatically.
+
+---
+
+## Output Examples
+
+> Sanitized screenshots will be added here. The output is a formatted `.xlsx` management report + optional `.html` logistics map.
