@@ -1,9 +1,0 @@
-# Python cache and generated files
-__pycache__/
-*.py[cod]
-*$py.class
-*.log
-.venv/
-venv/
-env/
-.env
