@@ -8,7 +8,7 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 
 ## Scripts
 
-### `Aviso_Automation` — Daily Logistics Dispatch Email Generator
+### `Aviso_Automation.vba` — Daily Logistics Dispatch Email Generator
 
 **Problem solved:** Every day the operations team had to manually copy shipment data from Excel into Outlook emails and send them to 5–15 logistics partners. This took ~1 hour per day and was prone to copy-paste errors.
 
@@ -30,6 +30,18 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 - Reads the current price indication table from a structured Excel sheet
 - Matches each row to the responsible regional coverage list
 - Generates and sends personalised Outlook emails per counterparty with only their relevant price rows
+
+---
+
+### `Email_Attachment_Importer.vba` — Daily Report Import from Outlook
+
+**Problem solved:** A daily data file arrived as an email attachment and had to be found in the inbox, saved, opened and copied into the working workbook by hand every morning.
+
+**What it does:**
+- Scans the most recent Outlook inbox items for today's email (subject prefix + `yyyymmdd` date tag)
+- Saves the `.xlsx` attachment to a unique temp file and opens it read-only
+- Replaces the contents of the target worksheet with the fresh data
+- Reports success or a clear "not found" message; errors are caught instead of failing silently
 
 ---
 
@@ -92,9 +104,3 @@ Each `.vba` file contains the full macro code. To use in Excel:
 4. Paste the script content
 5. Adjust the sheet name and column references at the top of each script to match your workbook
 6. Run with `F5` or assign to a button
-
----
-
-## Output Examples
-
-> Sanitized screenshots will be added here.
