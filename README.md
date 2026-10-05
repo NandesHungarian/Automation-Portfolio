@@ -46,7 +46,7 @@ Desktop app for multi-year analysis. It opens hundreds of daily rate files, matc
 | [`FCA_Price_Indication_Emailer`](./VBA/FCA_Price_Indication_Emailer.vba) | Sends the daily price table as an image in an Outlook email and saves the prices to a log sheet, building a price history for later analysis | |
 | [`Email_Attachment_Importer`](./VBA/Email_Attachment_Importer.vba) | One click finds today's report email in Outlook and pastes its Excel attachment into the right sheet. Easy to reuse for other daily emails | |
 | [`Period_Average_Calculator`](./VBA/Period_Average_Calculator.vba) | Calculates soybean meal price averages for the same periods as sunflower and rapeseed meal, even though the two files store dates differently | |
-| [`Tiered_Pricing_and_Deviation_Tracker`](./VBA/Tiered_Pricing_and_Deviation_Tracker.vba) | Flags contracts booked outside the approved pricing grid, with an audit sheet | |
+| [`Tiered_Pricing_and_Deviation_Tracker`](./VBA/Tiered_Pricing_and_Deviation_Tracker.vba) | Sends daily prices to three partner groups with their own price tables pasted into the email, and logs each period's price against the reference price | |
 | [`Incoming_Data_Consolidator`](./VBA/Incoming_Data_Consolidator.vba) | Merges and deduplicates regional data files into one master table | |
 | [`Regional_Coverage_Report_Distributor`](./VBA/Regional_Coverage_Report_Distributor.vba) | Splits the master report per coordinator and emails each slice | ~45 min/week |
 

@@ -71,16 +71,18 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 Files that describe the same thing in different ways are common. This macro is one example of keeping them in sync without retyping anything.
 ---
 
-### `Tiered_Pricing_and_Deviation_Tracker.vba` — Price Deviation Auditor
+### `Tiered_Pricing_and_Deviation_Tracker.vba` — Daily Prices to Three Partner Groups, with Price Log
 
-**Problem solved:** Contracts were sometimes booked at prices outside the approved tiered pricing grid. These deviations were not caught until end-of-month reconciliation.
+**How it was used:** Every day the factory prices went out to three partner groups (standard partners, brokers and end users), each with its own prices. The macro created one email per group from an Outlook template and pasted that group's two price tables, one per product, into the marked spots of the email. The recipients came from cells in the workbook and went into BCC, so partners did not see each other. After that it logged the day's prices for each delivery period together with the reference price and the difference, so we could follow how our premium moved over time.
+
+**Easy for anyone to use:** Every input (price tables, recipient lists, period prices) is a named cell in the workbook. Updating prices or adding a new partner happens in Excel, never in the code.
 
 **What it does:**
-- Reads the active tiered pricing grid
-- Compares each contract's booked price against the applicable tier
-- Highlights deviations with conditional formatting (color-coded by severity)
-- Generates a summary audit trail sheet listing all flagged contracts
-
+- Finds the Outlook template in several possible folders, so it works on any colleague's machine
+- Pastes the prices as real formatted tables, not images, so partners can copy the numbers
+- Retries the paste up to three times if the Windows clipboard is busy, a common cause of random errors (Error 4605) when copying from Excel into Outlook
+- Opens the emails as drafts for a final check before sending
+- Logs date, time, user, and price, reference price and difference for each delivery period (ASO, NDJ, FMA, MJJ)
 ---
 
 ### `Incoming_Data_Consolidator.vba` — Multi-Sheet Data Merger
