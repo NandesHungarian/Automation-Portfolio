@@ -45,7 +45,7 @@ VBA · [Details for every macro](./VBA)
 
 - Emails are prepared but opened as drafts, so a person checks them before sending
 - Data is found by labels, column headers or named cells, so the tools keep working when a table changes
-- In the newer macros, inputs are named cells in Excel, so colleagues can change them without touching the code
+- Where colleagues need to change inputs, they are named cells in Excel, so nobody has to touch the code
 - The Outlook tools find their templates on any colleague's computer, not only on mine
 - When something is missing, the tool says exactly what, instead of skipping it quietly
 
