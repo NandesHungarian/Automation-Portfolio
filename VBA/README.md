@@ -85,30 +85,29 @@ Files that describe the same thing in different ways are common. This macro is o
 - Logs date, time, user, and price, reference price and difference for each delivery period (ASO, NDJ, FMA, MJJ)
 ---
 
-### `Incoming_Data_Consolidator.vba` — Multi-Sheet Data Merger
+### Monthly Coverage Round Trip — `Regional_Coverage_Report_Distributor.vba` + `Incoming_Data_Consolidator.vba`
 
-**Problem solved:** Multiple regional teams sent their data in separate Excel files or sheets with slightly different column orders. Consolidating them required manual copy-paste and deduplication.
+These two macros work as a pair. The first sends the coverage files out, the second brings the answers back.
 
-**What it does:**
-- Iterates over all source sheets (or files via folder path)
-- Normalizes column order based on header names (not fixed column positions)
-- Deduplicates by a unique contract identifier column
-- Writes a clean master table to a target sheet
+**Background:** A large master table showed each partner's coverage, meaning how much of their monthly need they had already bought. Every month each regional colleague got their own part of it to update with new figures. Before, this was done by hand. More than 13 Excel files to open, a lot of copy-paste, and the same again when the answers came back. This was my first macro.
 
----
+#### Part 1: `Regional_Coverage_Report_Distributor.vba` — Send out
 
-### `Regional_Coverage_Report_Distributor.vba` — Report Splitter & Distributor
+- Loops through the list of regional colleagues
+- Opens each colleague's own file, filters the master table to their partners and copies the rows in
+- Hides the helper columns so the file is clean to fill in
+- Saves the file into a folder for the current month, created automatically if missing
+- Prepares an Outlook email with the file attached and a reply deadline. At the end only the Send button has to be pressed
 
-**Problem solved:** The weekly master coverage report contained data for all regional coordinators. Manually splitting it and emailing each coordinator their slice took ~45 minutes every week.
+#### Part 2: `Incoming_Data_Consolidator.vba` — Bring back
 
-**What it does:**
-- Reads the master coverage sheet
-- Groups rows by regional coordinator
-- Creates a separate formatted sheet per coordinator
-- Sends each sheet as an Outlook email attachment to the responsible person
+- Goes through every returned file in the incoming folder
+- Checks that the expected input sheet is there and reports any file that does not match
+- Removes filters and unhides rows and columns, so nothing a colleague hid is lost
+- Appends the raw data from all files into the master sheet as values
+- Stops with a clear message if a file causes an error, instead of leaving half-imported data behind
 
-**Time saved:** ~45 minutes/week (~3 hours/month)
-
+**Time saved:** 1–2 hours every month, and no more copy-paste errors between 13+ files
 ---
 
 ## How to Use

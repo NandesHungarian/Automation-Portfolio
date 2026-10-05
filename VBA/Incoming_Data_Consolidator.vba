@@ -68,17 +68,19 @@ Sub ConsolidateIncomingReports()
             GoTo SkipFile ' Skip to the next file if the sheet is missing
         End If
 
-        ' Unhide all columns to ensure no data is missed during copy
+        ' Remove filters and unhide rows/columns so no data is missed during copy
+        If wsSource.AutoFilterMode Then wsSource.AutoFilterMode = False
         wsSource.Cells.EntireColumn.Hidden = False
+        wsSource.Cells.EntireRow.Hidden = False
 
         ' Find the last row with data in Column A of the source file
         lastRowSource = wsSource.Cells(wsSource.Rows.Count, "A").End(xlUp).Row
         
         If lastRowSource >= 2 Then
             ' Define the range to copy (Columns A to Z, down to the last row)
-            ' Using SpecialCells to only capture visible data if rows were filtered
-            Set sourceRange = wsSource.Range("A2:Z" & lastRowSource).SpecialCells(xlCellTypeVisible)
+            Set sourceRange = wsSource.Range("A2:Z" & lastRowSource)
         Else
+            wbSource.Close False
             GoTo SkipFile ' Skip if there is no data in the file
         End If
 
@@ -92,8 +94,9 @@ Sub ConsolidateIncomingReports()
         wbSource.Close False
 
 SkipFile:
-        ' Reset the source sheet variable and get the next file
+        ' Reset the source variables and get the next file
         Set wsSource = Nothing
+        Set wbSource = Nothing
         fileName = Dir
     Loop
 
@@ -107,10 +110,11 @@ SkipFile:
     Exit Sub
 
 ErrorHandler:
-    ' Detailed error reporting
+    ' Stop instead of continuing with half-imported data, and close the open source file
     Application.ScreenUpdating = True
-    MsgBox "An error occurred: " & Err.Description & vbCrLf & _
-           "Error Source: " & Err.Source & vbCrLf & _
-           "Line Number: " & Erl, vbCritical, "Macro Error"
-    Resume Next
+    MsgBox "An error occurred while processing '" & fileName & "':" & vbCrLf & _
+           Err.Description & vbCrLf & vbCrLf & _
+           "The import was stopped. Please check the file and run the macro again.", vbCritical, "Macro Error"
+    On Error Resume Next
+    If Not wbSource Is Nothing Then wbSource.Close False
 End Sub
