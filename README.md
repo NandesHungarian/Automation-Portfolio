@@ -26,6 +26,12 @@ Logs into SAP ERP via GUI scripting, runs a custom transaction, exports the dail
 `win32com` · `SAP GUI Scripting` · `tkinter` · `folium` · `geopy`
 → Full documentation: [SAP_AgriTrade_Automation](https://github.com/NandesHungarian/SAP_AgriTrade_Automation)
 
+![Interactive logistics map](docs/images/logistics_map.jpg)
+*Generated logistics map: bases, delivery routes and product mix (test data).*
+
+![Weekly summary table](docs/images/weekly_summary.jpg)
+*Weekly summary appended to the report: quantity and weighted average net EUR price (test data).*
+
 **Historical Trade Data Analyzer** — [`Historical_Trade_Data_Analyzer.py`](./Python/Historical_Trade_Data_Analyzer.py)
 Desktop app that matches multi-year contract history to the FX and pricing data valid on each contract date, normalizes all prices to EUR/USD, filters invalid rows, and exports weighted-average summaries for management review.
 `pandas` · `numpy` · `tkinter` · `threading`

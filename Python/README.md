@@ -24,6 +24,9 @@ All company-specific data (T-codes, user IDs, file paths, partner and location n
 
 **Time saved:** 45–90 minutes/day → a single unattended run
 
+![Weekly summary table](../docs/images/weekly_summary.jpg)
+*Summary table appended to the weekly report (test data).*
+
 ---
 
 ### `map_generator.py` — Interactive Logistics Map
@@ -34,6 +37,9 @@ Turns the finished report into a self-contained interactive HTML map (Folium / L
 - City geocoding via OpenStreetMap Nominatim (`geopy`, no API key) with a local JSON cache
 - Ambiguous city names are resolved through a small Tkinter picker
 - Layer filtering per commodity via injected JavaScript
+
+![Interactive logistics map](../docs/images/logistics_map.jpg)
+*Sample output (test data).*
 
 ---
 
