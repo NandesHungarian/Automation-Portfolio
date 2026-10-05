@@ -43,7 +43,7 @@ Desktop app for multi-year analysis. It opens hundreds of daily rate files, matc
 | Macro | What it does | Time saved |
 |---|---|---|
 | [`Aviso_Automation`](./VBA/Aviso_Automation.vba) | Prepares a daily email for each partner with what they collected and what is still waiting, using their own Outlook template | ~1 hour/day |
-| [`FCA_Price_Indication_Emailer`](./VBA/FCA_Price_Indication_Emailer.vba) | Sends personalised FCA price offers to counterparties based on coverage region | |
+| [`FCA_Price_Indication_Emailer`](./VBA/FCA_Price_Indication_Emailer.vba) | Sends the daily price table as an image in an Outlook email and saves the prices to a log sheet, building a price history for later analysis | |
 | [`Email_Attachment_Importer`](./VBA/Email_Attachment_Importer.vba) | One click finds today's report email in Outlook and pastes its Excel attachment into the right sheet. Easy to reuse for other daily emails | |
 | [`Period_Average_Calculator`](./VBA/Period_Average_Calculator.vba) | Quantity-weighted average prices over configurable periods | |
 | [`Tiered_Pricing_and_Deviation_Tracker`](./VBA/Tiered_Pricing_and_Deviation_Tracker.vba) | Flags contracts booked outside the approved pricing grid, with an audit sheet | |

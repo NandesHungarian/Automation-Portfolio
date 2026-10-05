@@ -25,14 +25,16 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 
 ---
 
-### `FCA_Price_Indication_Emailer.vba` — FCA Price Offer Distributor
+### `FCA_Price_Indication_Emailer.vba` — Daily Price Email with Built-in Price History
 
-**Problem solved:** After a morning price meeting, traders needed to send FCA price indications to counterparties — each covering a specific geographic region. The correct prices, products, and recipients had to be matched manually from a master table.
+**How it was used:** The daily FCA prices were kept in a table in Excel. With one click the macro took this table as a picture and created a new Outlook email with the set recipient, subject and text, with the price table inserted in the body. It then saved the day's prices to a separate log sheet. This sheet worked as a digital price diary. When we later needed to know how prices had moved, the answer was already there and could be turned into a chart in minutes.
 
 **What it does:**
-- Reads the current price indication table from a structured Excel sheet
-- Matches each row to the responsible regional coverage list
-- Generates and sends personalised Outlook emails per counterparty with only their relevant price rows
+- Exports the price table range as an image and places it inline in the email body, so it looks the same on every device
+- Fills in recipient, dated subject and the standard text automatically
+- Opens the email as a draft for a final check before sending
+- Logs date, time, sender and every product position's prices to the log sheet, one row per day
+- Finds each price row by a label in a helper column, not a fixed row number, so the log keeps working when rows are added or moved in the price table
 
 ---
 
