@@ -65,7 +65,8 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 - Turns the text periods, with Hungarian month names, into real date ranges covering whole months
 - Averages the daily prices in each period, loading the data into memory in one step so it runs fast
 - Writes each average next to its period, with a clear note if data is missing or a period is written wrongly
-- Puts the source file back to its original state at the end
+- Puts the source file's inputs back to their original values at the end
+- Has no hard-coded cells. Single cells are referenced through Named Ranges and the date and price columns are found by their header, so inserting rows or columns does not break it
 
 Files that describe the same thing in different ways are common. This macro is one example of keeping them in sync without retyping anything.
 ---
