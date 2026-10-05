@@ -1,9 +1,9 @@
 ' ========================================================================================
-' SCRIPT: Tiered Pricing Email Dispatcher & Logger
+' SCRIPT: Partner Group Prices - Email Dispatcher & Logger
 '
 ' DESCRIPTION:
 ' This VBA macro automates the daily distribution of localized commodity prices to different 
-' client tiers (Standard, Broker, and End-User) using a predefined Outlook template. 
+' partner groups (Standard, Broker, and End-User) using a predefined Outlook template. 
 ' It dynamically injects distinct pricing tables into the email body and logs the quoted 
 ' prices for specific delivery periods, along with the price deviations against a baseline 
 ' reference point, into a tracking sheet for audit and reporting.
@@ -11,7 +11,7 @@
 ' PROCESS FLOW:
 '   1. Locates the Outlook email template across multiple possible network/local drives.
 '   2. Initializes Outlook and sets up the generic parameters (Date, User, Subject).
-'   3. Generates 3 separate BCC emails for each client tier by inserting specific data ranges.
+'   3. Generates 3 separate BCC emails for each partner group by inserting specific data ranges.
 '   4. Uses advanced Clipboard Error Handling (Retry Logic) to prevent COM/Clipboard locks 
 '      (Error 4605) during the cross-application table pasting process (Excel to WordEditor).
 '   5. Calculates the deviation (Spread/Premium) between quoted prices and the reference 
@@ -22,7 +22,7 @@
 
 Option Explicit
 
-Public Sub SendTieredPricingEmails()
+Public Sub SendPartnerGroupPriceEmails()
 
     ' === Variable Declarations ===
     Dim logSheet As Worksheet, ws As Worksheet
@@ -71,7 +71,7 @@ Public Sub SendTieredPricingEmails()
     ' =======================================================
 
     ' 1. Email: Standard Partners (Sent as BCC)
-    Call CreateTieredEmail(outlookApp, templatePath, _
+    Call CreatePartnerGroupEmail(outlookApp, templatePath, _
                           ws.Range("Standard_ProductA"), _
                           ws.Range("Standard_ProductB"), _
                           ws.Range("Standard_Email").Value, _
@@ -79,7 +79,7 @@ Public Sub SendTieredPricingEmails()
                           True) ' True = Use BCC
 
     ' 2. Email: Broker Partners (Sent as BCC)
-    Call CreateTieredEmail(outlookApp, templatePath, _
+    Call CreatePartnerGroupEmail(outlookApp, templatePath, _
                           ws.Range("Broker_ProductA"), _
                           ws.Range("Broker_ProductB"), _
                           ws.Range("Broker_Email").Value, _
@@ -87,7 +87,7 @@ Public Sub SendTieredPricingEmails()
                           True) 
                           
     ' 3. Email: End-User Partners (Sent as BCC)
-    Call CreateTieredEmail(outlookApp, templatePath, _
+    Call CreatePartnerGroupEmail(outlookApp, templatePath, _
                           ws.Range("EndUser_ProductA"), _
                           ws.Range("EndUser_ProductB"), _
                           ws.Range("EndUser_Email").Value, _
@@ -176,7 +176,7 @@ End Sub
 ' === HELPER SUB: DRAFTS A SINGLE EMAIL WITH DATA TABLES                                ===
 ' === (Includes advanced Clipboard retry logic to prevent Error 4605 during paste)      ===
 ' =========================================================================================
-Private Sub CreateTieredEmail(ByVal outlookApp As Object, ByVal templatePath As String, _
+Private Sub CreatePartnerGroupEmail(ByVal outlookApp As Object, ByVal templatePath As String, _
                              ByVal rngTable1 As Range, ByVal rngTable2 As Range, _
                              ByVal recipientAddress As String, ByVal todayDate As String, _
                              ByVal locationName As String, _

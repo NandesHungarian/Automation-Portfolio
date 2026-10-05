@@ -13,7 +13,7 @@ All scripts are anonymized. Partner names, sheet names, folders and email addres
 | [Email Attachment Importer](#email_attachment_importervba--daily-report-import-from-outlook) | Finds today's report email and pastes its Excel attachment into the workbook | ~5 min each run |
 | [Soybean Meal Period Averages](#period_average_calculatorvba--soybean-meal-averages-for-the-soy-ratio) | Connects two files that store periods differently, for the soy ratio | ~5 min each run |
 | [FCA Price Email](#fca_price_indication_emailervba--daily-price-email-with-price-log) | Sends the daily price table and keeps a price log | ~5 min each run |
-| [Tiered Pricing](#tiered_pricing_and_deviation_trackervba--daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | ~5 min each run |
+| [Partner Group Prices](#partner_group_pricesvba--daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | ~5 min each run |
 | [Aviso Automation](#aviso_automationvba--daily-pickup-summary-to-partners) | Tells each partner what they collected yesterday and what is still waiting | ~1 hour/day |
 | [Coverage Round Trip](#monthly-coverage-round-trip) | Sends the monthly coverage table out to colleagues and brings their answers back | 3–4 hours/month |
 
@@ -25,12 +25,12 @@ The four smaller macros take only a few minutes each, but together they save abo
 
 The same ideas come back in most of the macros.
 
-- **A person checks before anything is sent.** The macros prepare the emails but open them as drafts. Someone looks at each one and clicks Send. *(Aviso, FCA Price Email, Tiered Pricing, Coverage Round Trip)*
-- **It keeps working when the table changes.** Data is found by labels, column headers or Named Ranges instead of fixed cell addresses, so adding rows or moving data around does not break it. *(FCA Price Email, Soybean Meal Period Averages, Tiered Pricing)*
-- **Inputs live in Excel, not in the code.** Prices, recipient lists and periods are named cells in the workbook. A colleague can update them without opening the VBA editor. *(Tiered Pricing, Soybean Meal Period Averages)*
-- **It works on any colleague's machine.** Folder paths are built from the current Windows user name, and templates are searched in several folders. *(Aviso, Tiered Pricing)*
+- **A person checks before anything is sent.** The macros prepare the emails but open them as drafts. Someone looks at each one and clicks Send. *(Aviso, FCA Price Email, Partner Group Prices, Coverage Round Trip)*
+- **It keeps working when the table changes.** Data is found by labels, column headers or Named Ranges instead of fixed cell addresses, so adding rows or moving data around does not break it. *(FCA Price Email, Soybean Meal Period Averages, Partner Group Prices)*
+- **Inputs live in Excel, not in the code.** Prices, recipient lists and periods are named cells in the workbook. A colleague can update them without opening the VBA editor. *(Partner Group Prices, Soybean Meal Period Averages)*
+- **It works on any colleague's machine.** Folder paths are built from the current Windows user name, and templates are searched in several folders. *(Aviso, Partner Group Prices)*
 - **Nothing fails silently.** If something is missing, the macro says exactly what, instead of skipping it quietly. *(Aviso, Email Attachment Importer, Soybean Meal Period Averages, Coverage Round Trip)*
-- **The data is kept for later.** Every price email also writes the day's prices to a log sheet, so price history is ready for analysis. *(FCA Price Email, Tiered Pricing)*
+- **The data is kept for later.** Every price email also writes the day's prices to a log sheet, so price history is ready for analysis. *(FCA Price Email, Partner Group Prices)*
 
 ---
 
@@ -85,7 +85,7 @@ The same ideas come back in most of the macros.
 
 ---
 
-### `Tiered_Pricing_and_Deviation_Tracker.vba` — Daily Prices to Three Partner Groups
+### `Partner_Group_Prices.vba` — Daily Prices to Three Partner Groups
 
 **The problem:** Every day the factory prices went out to three partner groups (standard partners, brokers and end users), each with its own prices.
 
