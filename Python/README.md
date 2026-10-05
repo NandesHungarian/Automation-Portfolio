@@ -10,7 +10,7 @@ All company-specific data (T-codes, user IDs, file paths, partner and location n
 
 ### `sap_sales_automation.py` — SAP Sales & Logistics Workflow Automation
 
-**Problem solved:** The daily sales report was assembled by hand: export from SAP, convert HUF/USD prices to EUR with the day's FX rates, chase missing freight costs, reformat for management. This took 45–90 minutes every morning.
+**Problem solved:** The daily sales report was assembled by hand: export from SAP, convert HUF/USD prices to EUR with the day's FX rates, chase missing freight costs, reformat for management. This took 45–60 minutes every morning.
 
 **What it does:**
 - Launches SAP Logon if needed and logs in via the **SAP GUI Scripting API** (`win32com`)
@@ -23,7 +23,7 @@ All company-specific data (T-codes, user IDs, file paths, partner and location n
 - Logs every skipped row and failed run with the reason to `~/sap_automation.log`, so nothing fails silently
 - Optionally calls `map_generator.py` to build the logistics map
 
-**Time saved:** 45–90 minutes/day → a single unattended run
+**Time saved:** 45–60 minutes/day → a single unattended run
 
 ![Weekly summary table](../docs/images/weekly_summary.jpg)
 *Summary table appended to the weekly report (test data).*
@@ -50,8 +50,9 @@ Turns the finished report into a self-contained interactive HTML map (Folium / L
 
 **What it does:**
 - Tkinter desktop app: select the raw ERP Excel dump, processing runs in a background thread so the UI stays responsive
-- Scans the archive of daily rate files and matches each contract to the rates valid on its document date (regex-based filename date parsing)
+- Scans the archive of hundreds of daily forward rate files (one Excel per day) and matches each contract to the rates valid on its document date (regex-based filename date parsing)
 - Normalizes flat prices, truck freight and loading costs into EUR/USD
+- Uses vectorized pandas operations, so several years of contracts and rate files are processed quickly instead of being looked up by hand
 - Filters invalid rows (internal transfers, missing freight on CPT/DDP, unapproved users)
 - Exports a line-by-line dataset plus a weighted-average summary per commodity to Excel
 

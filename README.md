@@ -22,7 +22,7 @@ Real-world automation tools built to eliminate repetitive manual work in **agric
 ### 🐍 Python
 
 **SAP Sales & Logistics Workflow Automation** — [`sap_sales_automation.py`](./Python/sap_sales_automation.py) · [`map_generator.py`](./Python/map_generator.py)
-Logs into SAP ERP via GUI scripting, runs a custom transaction, exports the daily or weekly sales report, converts HUF/USD prices to EUR net equivalents using daily FX rate files, asks for missing freight costs in a Tkinter popup, builds a formatted management summary, and optionally generates an interactive HTML logistics map. Replaces a 45–90 minute manual process every morning.
+Logs into SAP ERP via GUI scripting, runs a custom transaction, exports the daily or weekly sales report, converts HUF/USD prices to EUR net equivalents using daily FX rate files, asks for missing freight costs in a Tkinter popup, builds a formatted management summary, and optionally generates an interactive HTML logistics map. Replaces a 45–60 minute manual process every morning.
 `win32com` · `SAP GUI Scripting` · `tkinter` · `folium` · `geopy`
 → Full documentation: [SAP_AgriTrade_Automation](https://github.com/NandesHungarian/SAP_AgriTrade_Automation)
 
@@ -33,7 +33,7 @@ Logs into SAP ERP via GUI scripting, runs a custom transaction, exports the dail
 *Weekly summary appended to the report: quantity and weighted average net EUR price (test data).*
 
 **Historical Trade Data Analyzer** — [`Historical_Trade_Data_Analyzer.py`](./Python/Historical_Trade_Data_Analyzer.py)
-Desktop app that matches multi-year contract history to the FX and pricing data valid on each contract date, normalizes all prices to EUR/USD, filters invalid rows, and exports weighted-average summaries for management review.
+Desktop app for multi-year analysis. It opens hundreds of daily rate files, matches every contract to the forward rates valid on its date, normalizes all prices to EUR/USD, filters invalid rows, and exports weighted-average summaries for management review.
 `pandas` · `numpy` · `tkinter` · `threading`
 
 ---
