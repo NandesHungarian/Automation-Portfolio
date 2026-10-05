@@ -10,11 +10,11 @@ All scripts are anonymized. Partner names, sheet names, folders and email addres
 
 | Macro | What it solves | Time saved |
 |---|---|---|
-| [Email Attachment Importer](#email_attachment_importervba--daily-report-import-from-outlook) | Finds today's report email and pastes its Excel attachment into the workbook | ~5 min each run |
-| [Soybean Meal Period Averages](#period_average_calculatorvba--soybean-meal-averages-for-the-soy-ratio) | Connects two files that store periods differently, for the soy ratio | ~5 min each run |
-| [FCA Price Email](#fca_price_indication_emailervba--daily-price-email-with-price-log) | Sends the daily price table and keeps a price log | ~5 min each run |
-| [Partner Group Prices](#partner_group_pricesvba--daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | ~5 min each run |
-| [Aviso Automation](#aviso_automationvba--daily-pickup-summary-to-partners) | Tells each partner what they collected yesterday and what is still waiting | ~1 hour/day |
+| [Email Attachment Importer](#daily-report-import-from-outlook) | Finds today's report email and pastes its Excel attachment into the workbook | ~5 min each run |
+| [Soybean Meal Period Averages](#soybean-meal-averages-for-the-soy-ratio) | Connects two files that store periods differently, for the soy ratio | ~5 min each run |
+| [FCA Price Email](#daily-price-email-with-price-log) | Sends the daily price table and keeps a price log | ~5 min each run |
+| [Partner Group Prices](#daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | ~5 min each run |
+| [Aviso Automation](#daily-pickup-summary-to-partners) | Tells each partner what they collected yesterday and what is still waiting | ~1 hour/day |
 | [Coverage Round Trip](#monthly-coverage-round-trip) | Sends the monthly coverage table out to colleagues and brings their answers back | 3–4 hours/month |
 
 The four smaller macros take only a few minutes each, but together they save about 20 minutes every day.
@@ -36,7 +36,9 @@ The same ideas come back in most of the macros.
 
 ## Getting data in
 
-### `Email_Attachment_Importer.vba` — Daily Report Import from Outlook
+### Daily Report Import from Outlook
+
+`Email_Attachment_Importer.vba`
 
 **The problem:** A daily report arrived as an Excel attachment. Every day someone had to find the email, save the file, open it and copy the data into the working workbook.
 
@@ -51,7 +53,9 @@ The same ideas come back in most of the macros.
 
 ---
 
-### `Period_Average_Calculator.vba` — Soybean Meal Averages for the Soy Ratio
+### Soybean Meal Averages for the Soy Ratio
+
+`Period_Average_Calculator.vba`
 
 **The problem:** We compared sunflower meal and rapeseed meal prices to the soybean meal price (soy ratio). The soybean meal averages had to come from the daily soy calculation file for exactly the same periods as the sunflower and rapeseed prices, for example January to May, May to August or September to December. One file wrote the periods as text (e.g. "2026. január"), while the other stored the prices by date.
 
@@ -70,7 +74,9 @@ The same ideas come back in most of the macros.
 
 ## Sending prices and notices
 
-### `FCA_Price_Indication_Emailer.vba` — Daily Price Email with Price Log
+### Daily Price Email with Price Log
+
+`FCA_Price_Indication_Emailer.vba`
 
 **The problem:** The daily FCA prices had to be sent out every day. We also needed to look back later at how the prices had moved.
 
@@ -85,7 +91,9 @@ The same ideas come back in most of the macros.
 
 ---
 
-### `Partner_Group_Prices.vba` — Daily Prices to Three Partner Groups
+### Daily Prices to Three Partner Groups
+
+`Partner_Group_Prices.vba`
 
 **The problem:** Every day the factory prices went out to three partner groups (standard partners, brokers and end users), each with its own prices.
 
@@ -101,7 +109,9 @@ The same ideas come back in most of the macros.
 
 ---
 
-### `Aviso_Automation.vba` — Daily Pickup Summary to Partners
+### Daily Pickup Summary to Partners
+
+`Aviso_Automation.vba`
 
 **The problem:** The workbook tracked which partners collected their ordered goods and which did not. Every day each partner with an order for the previous day, usually 5–15 partners, had to get their own summary.
 
@@ -126,14 +136,14 @@ The same ideas come back in most of the macros.
 
 **The solution:** Two macros that work as a pair. The first sends the files out, the second brings the answers back into the master table. This was my first macro.
 
-**Part 1: `Regional_Coverage_Report_Distributor.vba` — Send out**
+**Part 1, sending out:** `Regional_Coverage_Report_Distributor.vba`
 - Loops through the list of regional colleagues
 - Opens each colleague's own file, filters the master table to that colleague's rows and copies them in
 - Hides the helper columns so the file is clean to fill in
 - Saves the file into a folder for the current month, created automatically if missing
 - Prepares an Outlook email with the file attached and a reply deadline. At the end only the Send button has to be pressed
 
-**Part 2: `Incoming_Data_Consolidator.vba` — Bring back**
+**Part 2, bringing back:** `Incoming_Data_Consolidator.vba`
 - Goes through every returned file in the incoming folder
 - Checks that the expected input sheet is there and reports any file that does not match
 - Removes filters and unhides rows and columns, so nothing a colleague hid is lost
@@ -150,7 +160,7 @@ Each `.vba` file contains the full macro code. To use it in Excel:
 
 1. Open the target Excel workbook
 2. Press `Alt + F11` to open the VBA editor
-3. Insert a new module (`Insert → Module`) and paste the script
+3. Insert a new module (Insert, Module) and paste the script
 4. Set the values in the configuration block at the top of the script (folders, sheet names, Named Ranges, column headers)
 5. Run with `F5` or assign the macro to a button
 

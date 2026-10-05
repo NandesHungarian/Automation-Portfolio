@@ -161,7 +161,7 @@ Function ConvertRangeToHTML(rng As Range) As String
     Dim cell As Range, currentRow As Range
     Dim htmlOutput As String
 
-    ' Apply inline CSS for enterprise-grade styling
+    ' Inline CSS so the table looks the same in every mail client
     htmlOutput = "<table border='1' cellspacing='0' cellpadding='4' style='border-collapse:collapse; font-family:Calibri; font-size:11pt; border: 1px solid black;'>"
     
     For Each currentRow In rng.Rows

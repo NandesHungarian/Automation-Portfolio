@@ -12,7 +12,7 @@
 '   1. Locates the Outlook email template across multiple possible network/local drives.
 '   2. Initializes Outlook and sets up the generic parameters (Date, User, Subject).
 '   3. Generates 3 separate BCC emails for each partner group by inserting specific data ranges.
-'   4. Uses advanced Clipboard Error Handling (Retry Logic) to prevent COM/Clipboard locks 
+'   4. Retries the paste if the clipboard is locked 
 '      (Error 4605) during the cross-application table pasting process (Excel to WordEditor).
 '   5. Calculates the deviation (Spread/Premium) between quoted prices and the reference 
 '      point for different delivery periods (e.g., ASO, NDJ, FMA, MJJ) and logs them.
@@ -53,7 +53,7 @@ Public Sub SendPartnerGroupPriceEmails()
         Exit Sub
     End If
 
-    ' === Initialize Outlook Application (Singleton approach) ===
+    ' === Initialize Outlook Application (reuse it if already open) ===
     On Error Resume Next
     Set outlookApp = GetObject(, "Outlook.Application")
     If outlookApp Is Nothing Then
@@ -174,7 +174,7 @@ End Sub
 
 ' =========================================================================================
 ' === HELPER SUB: DRAFTS A SINGLE EMAIL WITH DATA TABLES                                ===
-' === (Includes advanced Clipboard retry logic to prevent Error 4605 during paste)      ===
+' === (Retries the paste if the clipboard is busy, Error 4605)                      ===
 ' =========================================================================================
 Private Sub CreatePartnerGroupEmail(ByVal outlookApp As Object, ByVal templatePath As String, _
                              ByVal rngTable1 As Range, ByVal rngTable2 As Range, _

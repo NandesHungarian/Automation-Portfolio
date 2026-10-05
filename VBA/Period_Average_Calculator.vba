@@ -178,7 +178,7 @@ ErrorHandler:
 End Sub
 
 
-' --- OPTIMIZED FUNCTION: Uses Memory Arrays for high-speed calculation ---
+' --- Average calculation: reads the columns into memory arrays, much faster than reading cell by cell ---
 Function CalculateAverage_Optimized(ws As Worksheet, firstDataRow As Long, dateCol As Long, priceCol As Long, _
                                     fromDate As Date, toDate As Date) As Double
     Dim lastRow As Long
