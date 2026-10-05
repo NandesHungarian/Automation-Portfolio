@@ -4,7 +4,7 @@
 
 Real-world automation tools built to eliminate repetitive manual work in **agricultural commodity trading, logistics, and business reporting**. Every script here was written to solve an actual operational problem at work, not as a tutorial exercise.
 
-**Contact:** magyarnana97@gmail.com &nbsp;·&nbsp; **Location:** Budapest, Hungary
+**Contact:** magyarnana97@gmail.com &nbsp;·&nbsp; **Location:** Malta
 
 ---
 
