@@ -47,7 +47,7 @@ Desktop app for multi-year analysis. It opens hundreds of daily rate files, matc
 | [`Email_Attachment_Importer`](./VBA/Email_Attachment_Importer.vba) | One click finds today's report email in Outlook and pastes its Excel attachment into the right sheet. Easy to reuse for other daily emails | |
 | [`Period_Average_Calculator`](./VBA/Period_Average_Calculator.vba) | Calculates soybean meal price averages for the same periods as sunflower and rapeseed meal, even though the two files store dates differently | |
 | [`Tiered_Pricing_and_Deviation_Tracker`](./VBA/Tiered_Pricing_and_Deviation_Tracker.vba) | Sends daily prices to three partner groups with their own price tables pasted into the email, and logs each period's price against the reference price | |
-| [`Regional_Coverage_Report_Distributor`](./VBA/Regional_Coverage_Report_Distributor.vba) + [`Incoming_Data_Consolidator`](./VBA/Incoming_Data_Consolidator.vba) | Monthly coverage round trip. Sends each regional colleague their own part of the master table to update, then pulls all returned files back into the master table | 1–2 hours/month |
+| [`Regional_Coverage_Report_Distributor`](./VBA/Regional_Coverage_Report_Distributor.vba) + [`Incoming_Data_Consolidator`](./VBA/Incoming_Data_Consolidator.vba) | Monthly coverage round trip. Sends each regional colleague their own part of the master table to update, then pulls all returned files back into the master table | 3–4 hours/month |
 
 Details for each macro: [`VBA/README.md`](./VBA/README.md)
 

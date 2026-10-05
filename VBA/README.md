@@ -107,7 +107,7 @@ These two macros work as a pair. The first sends the coverage files out, the sec
 - Appends the raw data from all files into the master sheet as values
 - Stops with a clear message if a file causes an error, instead of leaving half-imported data behind
 
-**Time saved:** 1–2 hours every month, and no more copy-paste errors between 13+ files
+**Time saved:** 3–4 hours every month, and no more copy-paste errors between 13+ files
 ---
 
 ## How to Use
