@@ -43,11 +43,13 @@ VBA · [Details for every macro](./VBA)
 
 ## How I build these tools
 
-- Emails are prepared but opened as drafts, so a person checks them before sending
-- Data is found by labels, column headers or named cells, so the tools keep working when a table changes
-- Where colleagues need to change inputs, they are named cells in Excel, so nobody has to touch the code
-- The Outlook tools find their templates on any colleague's computer, not only on mine
-- When something is missing, the tool says exactly what, instead of skipping it quietly
+I built each tool for a task I was doing myself, so I knew where the time went and what tended to go wrong.
+
+- Simple to use. Most tools start with one click, and emails open as drafts so someone can check them before they go out.
+- Low maintenance. Columns are found by their header and inputs are named cells in Excel, so a changed table or a new partner needs no change in the code.
+- When a tool cannot know something, it asks. A missing freight cost or an unclear city name opens a small window, and the answer is remembered.
+- If a file, email or template is missing, the tool says which one.
+- Source files stay as they were, and the SAP password is kept in Windows Credential Manager.
 
 ---
 
