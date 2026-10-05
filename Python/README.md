@@ -20,6 +20,7 @@ All company-specific data (T-codes, user IDs, file paths, partner and location n
 - Detects contracts with missing freight (non-FCA IncoTerms) and asks for the value in a **Tkinter popup**, cached per contract
 - Maps columns by header name, not fixed position, so it survives SAP layout changes
 - Highlights anomalies (internal partners, implausible prices, missing freight) and appends a weighted-average summary table
+- Logs every skipped row and failed run with the reason to `~/sap_automation.log`, so nothing fails silently
 - Optionally calls `map_generator.py` to build the logistics map
 
 **Time saved:** 45–90 minutes/day → a single unattended run
