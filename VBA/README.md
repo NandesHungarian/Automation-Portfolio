@@ -10,7 +10,7 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 
 ### `Aviso_Automation.vba` — Daily Pickup Summary Emails to Partners
 
-**How it was used:** The workbook tracked which partners collected their ordered goods and which did not. The macro went through the list of partners who had orders for the previous day. For each one it filtered the two pivot tables (collected and not collected) to that partner, opened the partner's own Outlook template (`.oft`) and placed both tables into the marked spots in the email (`{Tábla1}`, `{Tábla2}`). Partners without a template were skipped and listed at the end, so nobody was missed silently.
+**How it was used:** The workbook tracked which partners collected their ordered goods and which did not. The macro went through the list of partners who had orders for the previous day, usually 5–15 partners. For each one it filtered the two pivot tables (collected and not collected) to that partner, opened the partner's own Outlook template (`.oft`) and placed both tables into the marked spots in the email (`{Tábla1}`, `{Tábla2}`). Partners without a template were skipped and listed at the end, so nobody was missed silently.
 
 **Built-in check:** The emails open as drafts instead of being sent straight away. Someone looks over each one and clicks Send, so a wrong figure never reaches a partner unnoticed.
 
