@@ -10,12 +10,14 @@ All scripts are anonymized. Partner names, sheet names, folders and email addres
 
 | Macro | What it solves | Time saved |
 |---|---|---|
-| [Email Attachment Importer](#email_attachment_importervba--daily-report-import-from-outlook) | Finds today's report email and pastes its Excel attachment into the workbook | — |
-| [Soybean Meal Period Averages](#period_average_calculatorvba--soybean-meal-averages-for-the-soy-ratio) | Connects two files that store periods differently, for the soy ratio | — |
-| [FCA Price Email](#fca_price_indication_emailervba--daily-price-email-with-price-log) | Sends the daily price table and keeps a price log | — |
-| [Tiered Pricing](#tiered_pricing_and_deviation_trackervba--daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | — |
+| [Email Attachment Importer](#email_attachment_importervba--daily-report-import-from-outlook) | Finds today's report email and pastes its Excel attachment into the workbook | ~5 min each run |
+| [Soybean Meal Period Averages](#period_average_calculatorvba--soybean-meal-averages-for-the-soy-ratio) | Connects two files that store periods differently, for the soy ratio | ~5 min each run |
+| [FCA Price Email](#fca_price_indication_emailervba--daily-price-email-with-price-log) | Sends the daily price table and keeps a price log | ~5 min each run |
+| [Tiered Pricing](#tiered_pricing_and_deviation_trackervba--daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | ~5 min each run |
 | [Aviso Automation](#aviso_automationvba--daily-pickup-summary-to-partners) | Tells each partner what they collected yesterday and what is still waiting | ~1 hour/day |
 | [Coverage Round Trip](#monthly-coverage-round-trip) | Sends the monthly coverage table out to colleagues and brings their answers back | 3–4 hours/month |
+
+The four smaller macros take only a few minutes each, but together they save about 20 minutes every day.
 
 ---
 
