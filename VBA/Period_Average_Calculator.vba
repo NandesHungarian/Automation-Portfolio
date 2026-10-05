@@ -108,6 +108,9 @@ Sub CalculatePeriodAverages()
             cell.Offset(0, 7).Value = "date error"
             GoTo NextCell
         End If
+
+        ' Include the whole end month (e.g. "január - május" runs until 31 May)
+        toDate = DateSerial(Year(toDate), Month(toDate) + 1, 0)
         
         ' --- Calculate Average using the optimized Array function ---
         avgVal = CalculateAverage_Optimized(wsPriceCalc, fromDate, toDate)

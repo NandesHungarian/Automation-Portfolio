@@ -55,15 +55,19 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 
 ---
 
-### `Period_Average_Calculator.vba` — Weighted Average Price Calculator
+### `Period_Average_Calculator.vba` — Soybean Meal Averages for the Soy Ratio
 
-**Problem solved:** Management reporting required weighted average commodity prices over configurable periods (weekly, monthly, crop year). This was done manually using complex nested Excel formulas that broke when source data structure changed.
+**How it was used:** We compared sunflower meal and rapeseed meal prices to the soybean meal price (soy ratio). For this, the soybean meal averages had to come from the daily soy calculation file for exactly the same periods as the sunflower and rapeseed prices, for example January to May, May to August or September to December. The difficulty was that one file wrote the periods as text (e.g. "2026. január") while the other stored the prices by date. The macro connects the two. When the period changes, the averages follow.
 
 **What it does:**
-- Accepts a configurable date range input
-- Calculates weighted averages (by quantity) for each commodity and base location combination
-- Writes results to a formatted summary sheet
+- Opens today's soy calculation file, or uses it if it is already open
+- Sets the location in that file and recalculates it
+- Turns the text periods, with Hungarian month names, into real date ranges covering whole months
+- Averages the daily prices in each period, loading the data into memory in one step so it runs fast
+- Writes each average next to its period, with a clear note if data is missing or a period is written wrongly
+- Puts the source file back to its original state at the end
 
+Files that describe the same thing in different ways are common. This macro is one example of keeping them in sync without retyping anything.
 ---
 
 ### `Tiered_Pricing_and_Deviation_Tracker.vba` — Price Deviation Auditor
