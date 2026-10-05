@@ -1,71 +1,26 @@
-# Python Automation Scripts
+# Python Scripts
 
-Python tools for **SAP-based sales reporting and multi-year trade data analysis** in agricultural commodity trading.
+## Historical Trade Data Analyzer
 
-All company-specific data (T-codes, user IDs, file paths, partner and location names) has been anonymized.
+`Historical_Trade_Data_Analyzer.py`
 
----
+**The problem:** When sales had to be analysed over several years, every past contract had to be converted from HUF to EUR or USD with the forward rates that were valid on that day. These rates are stored in hundreds of daily Excel files, one file per day. Looking them up by hand for thousands of contracts was not realistic.
 
-## Scripts
+**The solution:** A small desktop app. You choose the SAP export with the contracts, and the script opens the daily rate files, matches every contract to the right day's rates and converts the prices. pandas keeps this fast even with several years of data.
 
-### `sap_sales_automation.py` — SAP Sales & Logistics Workflow Automation
+**Key details:**
+- Each contract is matched to the rate file of its document date, and within that file to the forward rate for one month after the shipment start
+- The file names write the date in several ways (for example with or without leading zeros), and the script recognises all of them
+- Flat price, truck freight and loading costs are all converted, so the result is a net price in EUR and USD
+- Rows that would distort the averages are left out and marked with the reason, for example internal partners or delivered contracts without freight
+- The work runs in the background, so the window stays responsive and shows the progress
+- The result is an Excel file with every contract line and a summary sheet with weighted average prices per product
 
-**Problem solved:** The daily sales report was assembled by hand: export from SAP, convert HUF/USD prices to EUR with the day's FX rates, chase missing freight costs, reformat for management. This took 45–60 minutes every morning.
-
-**What it does:**
-- Launches SAP Logon if needed and logs in via the **SAP GUI Scripting API** (`win32com`)
-- Runs the custom sales transaction for the right date range (daily report on weekdays, weekly report on Mondays)
-- Exports the ALV grid to Excel and picks up the new workbook automatically
-- Converts multi-currency flat prices and freight costs to EUR using the matching daily FX rate files
-- Detects contracts with missing freight (non-FCA IncoTerms) and asks for the value in a **Tkinter popup**, cached per contract
-- Maps columns by header name, not fixed position, so it survives SAP layout changes
-- Highlights anomalies (internal partners, implausible prices, missing freight) and appends a weighted-average summary table
-- Logs every skipped row and failed run with the reason to `~/sap_automation.log`, so nothing fails silently
-- Optionally calls `map_generator.py` to build the logistics map
-
-**Time saved:** 45–60 minutes/day → a single unattended run
-
-![Weekly summary table](images/weekly_summary.jpg)
-*Summary table appended to the weekly report (test data).*
+**Setup:** `pip install -r requirements.txt`, then set the folders in the configuration block at the top of the script.
 
 ---
 
-### `map_generator.py` — Interactive Logistics Map
+## SAP Sales Report and Logistics Map
 
-Turns the finished report into a self-contained interactive HTML map (Folium / Leaflet.js):
-- Routes from loading bases to delivery cities, sized by quantity and colored by commodity
-- FCA volumes shown as pie-style markers at the base location
-- City geocoding via OpenStreetMap Nominatim (`geopy`, no API key) with a local JSON cache
-- Ambiguous city names are resolved through a small Tkinter picker
-- Layer filtering per commodity via injected JavaScript
-
-![Interactive logistics map](images/logistics_map.jpg)
-*Sample output (test data).*
-
----
-
-### `Historical_Trade_Data_Analyzer.py` — Multi-Year Price Normalizer
-
-**Problem solved:** Comparing contract prices across several years was impossible without manually looking up the FX rate and pricing data valid on each contract date.
-
-**What it does:**
-- Tkinter desktop app: select the raw ERP Excel dump, processing runs in a background thread so the UI stays responsive
-- Scans the archive of hundreds of daily forward rate files (one Excel per day) and matches each contract to the rates valid on its document date (regex-based filename date parsing)
-- Normalizes flat prices, truck freight and loading costs into EUR/USD
-- Uses vectorized pandas operations, so several years of contracts and rate files are processed quickly instead of being looked up by hand
-- Filters invalid rows (internal transfers, missing freight on CPT/DDP, unapproved users)
-- Exports a line-by-line dataset plus a weighted-average summary per commodity to Excel
-
----
-
-## Setup
-
-Requires Windows, Microsoft Excel, and SAP GUI with scripting enabled (SAP Logon → Options → Scripting).
-
-```bash
-pip install -r requirements.txt
-```
-
-On first run `sap_sales_automation.py` creates `~/sap_config.txt` for the SAP credentials. This file is excluded by `.gitignore` and never committed. Adjust the anonymized configuration block at the top of each script (`SAP_CFG_*`, folder paths) to your environment.
-
-> The SAP workflow also lives in its own repository with full documentation: [SAP_AgriTrade_Automation](https://github.com/NandesHungarian/SAP_AgriTrade_Automation).
+The daily SAP reporting script and the map generator have their own repository with full documentation:
+[SAP_AgriTrade_Automation](https://github.com/NandesHungarian/SAP_AgriTrade_Automation)
