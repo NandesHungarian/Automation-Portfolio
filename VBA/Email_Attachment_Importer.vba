@@ -1,3 +1,20 @@
+' =========================================================================================
+' DAILY EMAIL ATTACHMENT IMPORTER
+' -----------------------------------------------------------------------------------------
+' Author: Nándor Magyar
+' Description:
+' Started from a button in the Excel workbook. Opens classic Outlook, finds today's email
+' by its subject prefix and date tag (yyyymmdd), opens the .xlsx attachment and pastes
+' its data into the target worksheet.
+'
+' Reuse: set SUBJECT_PREFIX and TARGET_SHEET_NAME in the configuration block below.
+' Several copies of this macro ran in parallel for different daily emails.
+'
+' Requirement: classic Outlook for Windows (the new Outlook does not support VBA).
+' =========================================================================================
+
+Option Explicit
+
 Sub ImportSpecificEmailAttachment()
     
     ' Error handling to prevent the macro from crashing silently

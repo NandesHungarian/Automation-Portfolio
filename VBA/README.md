@@ -8,15 +8,18 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 
 ## Scripts
 
-### `Aviso_Automation.vba` — Daily Logistics Dispatch Email Generator
+### `Aviso_Automation.vba` — Daily Pickup Summary Emails to Partners
 
-**Problem solved:** Every day the operations team had to manually copy shipment data from Excel into Outlook emails and send them to 5–15 logistics partners. This took ~1 hour per day and was prone to copy-paste errors.
+**How it was used:** The workbook tracked which partners collected their ordered goods and which did not. The macro went through the list of partners who had orders for the previous day. For each one it filtered the two pivot tables (collected and not collected) to that partner, opened the partner's own Outlook template (`.oft`) and placed both tables into the marked spots in the email (`{Tábla1}`, `{Tábla2}`). Partners without a template were skipped and listed at the end, so nobody was missed silently.
+
+**Built-in check:** The emails open as drafts instead of being sent straight away. Someone looks over each one and clicks Send, so a wrong figure never reaches a partner unnoticed.
 
 **What it does:**
-- Reads active shipment rows from the master Excel workbook
-- Formats the data into an HTML table matching the company's standard aviso template
-- Injects the table into an Outlook `.oft` template
-- Sends individualized emails to each logistics partner automatically
+- Loops through the previous day's partner list and filters both pivot tables per partner
+- Finds the partner's template, searching several folders in order
+- Converts the filtered ranges into formatted HTML tables
+- Works on any colleague's machine, because the template folders are built from the current Windows user name
+- Shows a summary at the end with the drafts created and the partners that need attention
 
 **Time saved:** ~1 hour/day (~20 hours/month)
 
@@ -35,13 +38,18 @@ All scripts are anonymized — partner names, sheet names, and internal referenc
 
 ### `Email_Attachment_Importer.vba` — Daily Report Import from Outlook
 
-**Problem solved:** A daily data file arrived as an email attachment and had to be found in the inbox, saved, opened and copied into the working workbook by hand every morning.
+**How it was used:** A button in the Excel workbook started the macro. It opened classic Outlook, looked for today's email by the date tag in its subject, opened the Excel attachment and pasted the data into the right worksheet. Before, this meant finding the email, saving the file, opening it and copying the data by hand every day.
+
+**Easy to reuse:** The subject and the target sheet are set in two lines at the top. I ran several copies of this macro for different daily emails, each with its own subject.
 
 **What it does:**
-- Scans the most recent Outlook inbox items for today's email (subject prefix + `yyyymmdd` date tag)
-- Saves the `.xlsx` attachment to a unique temp file and opens it read-only
-- Replaces the contents of the target worksheet with the fresh data
-- Reports success or a clear "not found" message; errors are caught instead of failing silently
+- Checks the latest 150 inbox emails for the subject prefix plus today's date (`yyyymmdd`)
+- Skips meeting requests and other non-mail items
+- Saves the `.xlsx` attachment to a temp file and opens it read-only
+- Replaces the target sheet's contents with the fresh data
+- Shows a clear message if today's email or its attachment is missing
+
+**Requirement:** classic Outlook for Windows. The new Outlook does not support VBA.
 
 ---
 
