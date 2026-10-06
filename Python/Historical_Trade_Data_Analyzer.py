@@ -178,7 +178,7 @@ def load_historical_rates(doc_dates):
             rate_db[cache_key] = df_temp
             
         except Exception as e:
-            gui_app.log(f"Error reading file: {os.path.basename(file_path)}")
+            gui_app.log(f"Error reading file: {os.path.basename(file_path)} ({e})")
         finally:
             if os.path.exists(temp_file_path):
                 try: os.remove(temp_file_path)

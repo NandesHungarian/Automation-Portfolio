@@ -10,10 +10,10 @@ All scripts are anonymized. Partner names, sheet names, folders and email addres
 
 | Macro | What it solves | Time saved |
 |---|---|---|
-| [Email Attachment Importer](#daily-report-import-from-outlook) | Finds today's report email and pastes its Excel attachment into the workbook | ~5 min each run |
+| [Email Attachment Importer](#daily-report-import-from-outlook) | Finds today's report email and pastes its Excel attachment into the workbook | ~5 min/day |
 | [Soybean Meal Period Averages](#soybean-meal-averages-for-the-soy-ratio) | Connects two files that store periods differently, for the soy ratio | ~5 min each run |
-| [FCA Price Email](#daily-price-email-with-price-log) | Sends the daily price table and keeps a price log | ~5 min each run |
-| [Partner Group Prices](#daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | ~5 min each run |
+| [FCA Price Email](#daily-price-email-with-price-log) | Sends the daily price table and keeps a price log | ~5 min/day |
+| [Partner Group Prices](#daily-prices-to-three-partner-groups) | Sends daily prices to three partner groups and logs them against the reference price | ~5 min/day |
 | [Aviso Automation](#daily-pickup-summary-to-partners) | Tells each partner what they collected yesterday and what is still waiting | ~1 hour/day |
 | [Coverage Round Trip](#monthly-coverage-round-trip) | Sends the monthly coverage table out to colleagues and brings their answers back | 3–4 hours/month |
 
@@ -154,7 +154,7 @@ The same ideas come back in most of the macros.
 
 ---
 
-## How to Use
+## How to use
 
 Each `.vba` file contains the full macro code. To use it in Excel:
 

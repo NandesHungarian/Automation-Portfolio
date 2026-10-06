@@ -4,7 +4,7 @@ I worked in agricultural commodity trading, where a lot of the day went into ope
 
 **Together they save about 45 hours a month.**
 
-Nándor Magyar · Malta · magyarnana97@gmail.com
+Nándor Magyar · Malta · magyarnana97@gmail.com · [LinkedIn](https://www.linkedin.com/in/nandor-magyar-1997nm/)
 
 ---
 

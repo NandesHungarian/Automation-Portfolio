@@ -1,3 +1,18 @@
+' ========================================================================================
+' SCRIPT: FCA Price Indication Emailer
+'
+' DESCRIPTION:
+' Takes the daily FCA price table as a picture, creates an Outlook email with the set
+' recipient, subject and text, and places the table in the body. The email opens as a
+' draft for a final check. After that the day's prices are written to the log sheet,
+' one row per day, so the price history is ready for later charts.
+'
+' Each price row is found by its label in the helper column (e.g. "SFM_1", "RSM_3"),
+' so the log keeps working when rows are added or moved in the price table.
+' ========================================================================================
+
+Option Explicit
+
 Sub SendCommodityPrices_InsertPicture()
     ' Error handling
     On Error GoTo ErrorHandler
@@ -201,7 +216,7 @@ CleanExit:
 
 ErrorHandler:
     Application.ScreenUpdating = True
-    MsgBox "An error occurred: " & Err.Description & vbCrLf & "Error at line: " & Erl, vbCritical, "Macro Error"
+    MsgBox "An error occurred: " & Err.Description, vbCritical, "Macro Error"
     Resume CleanExit
 
 End Sub
