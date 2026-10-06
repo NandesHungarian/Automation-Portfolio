@@ -49,7 +49,7 @@ I built each tool for a task I was doing myself, so I knew where the time went a
 - Low maintenance. Columns are found by their header and inputs are named cells in Excel, so a changed table or a new partner needs no change in the code.
 - When a tool cannot know something, it asks. A missing freight cost or an unclear city name opens a small window, and the answer is remembered.
 - If a file, email or template is missing, the tool says which one.
-- Built to be reused. A macro written for one daily email or file can be set up for another by changing a couple of settings, and files that store the same data differently can still be connected.
+- I look for a way through problems that seem too complicated at first. For the soy ratio, two files had to work together even though one wrote the periods as text and the other stored the prices by date.
 
 ---
 
